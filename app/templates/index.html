@@ -1,0 +1,75 @@
+{% extends "layout.html" %} {% block body %}
+<style>
+label {
+	font-size: large;
+}
+.customSelect {
+	max-width: 60%;
+	margin-left: 20%;
+	font-weight: bold;
+	font-size: large;
+	padding-bottom: inherit;
+}
+</style>
+<div class="panel-width">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<form action="{{ url_for('search') }}" method="post" enctype="multipart/form-data">
+				<select name="cities" class="form-control customSelect">
+					<option value="Riyadh" selected="selected">الرياض</option>
+				</select>
+
+
+				<br>
+				<label>المراحل</label>
+				<br>
+
+
+				<label>روضة</label>
+				<input class="checkbox-inline" id="rawdhaReal" name="rawdha" type="checkbox" value="1">
+				<input id="rawdhaHidden" name="rawdha" type="hidden" value="">
+
+				<label>تمهيدي</label>
+				<input class="checkbox-inline" id="tamhedyReal" name="tamhedy" type="checkbox" value="1">
+				<input id="tamhedyHidden" name="tamhedy" type="hidden" value="">
+				<br>
+
+				<label>ابتدائي</label>
+				<input class="checkbox-inline" id="elementaryReal" name="elementary" type="checkbox" value="1">
+				<input id="elementaryHidden" name="elementary" type="hidden" value="">
+
+				<label>متوسطة</label>
+				<input class="checkbox-inline" id="intermediateReal" name="intermediate" type="checkbox" value="1">
+				<input id="intermediateHidden" name="intermediate" type="hidden" value="">
+				<br>
+
+				<label>ثانوي</label>
+				<input id="highSchoolReal" name="high_school" type="checkbox" value="1">
+				<input id="highSchoolHidden" name="high_school" type="hidden" value="">
+				<br><br>
+
+				<script>
+					if (document.getElementById("rawdhaReal").checked) {
+						document.getElementById("rawdhaHidden").disabled = true;
+					}
+					if (document.getElementById("tamhedyReal").checked) {
+						document.getElementById("tamhedyHidden").disabled = true;
+					}
+					if (document.getElementById("elementaryReal").checked) {
+						document.getElementById("elementaryHidden").disabled = true;
+					}
+					if (document.getElementById("intermediateReal").checked) {
+						document.getElementById("intermediateHidden").disabled = true;
+					}
+					if (document.getElementById("highSchoolReal").checked) {
+						document.getElementById("highSchoolHidden").disabled = true;
+					}
+				</script>
+
+				<button type="submit" class="btn btn-primary">Search</button>
+
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

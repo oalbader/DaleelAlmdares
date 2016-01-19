@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='justified-nav.css') }}"
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/south-street/jquery-ui.css" id="theme">
+	<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='imgSlide.css') }}">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="{{ url_for('static', filename='bootstrap-filestyle.min.js') }}"></script>
+
+	<title>دليل المدارس</title>
+</head>
+
+<body>
+	<div class="container">
+		<nav style="max-width:70%;margin-left:15%">
+			<ul class="nav nav-justified">
+				<li><a href="{{ url_for('contactUs') }}">تواصل معنا</a></li>
+				<li><a href="{{ url_for('browse') }}">استعرض المدارس</a></li>
+				<li><a href="{{ url_for('addSchoolUI') }}">إضافة مدرسة</a></li>
+				<li><a href="{{ url_for('index') }}">الرئيسية</a></li>
+			</ul>
+		</nav>
+
+
+		{% block body%}{% endblock %}
+	</div>
+	<footer class="footer">
+
+	</footer>
+</body>
+
+</html>

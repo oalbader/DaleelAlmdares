@@ -1,0 +1,68 @@
+{% extends "layout.html" %} {% block body %}
+
+<div class="text-right">
+
+	{% if highSchoolTrigger %}
+	<h3> ثانوي </h3>
+  {% for school in schoolList %}
+	<ul class="list-unstyled list-inline">
+    {% if school.highSchool %}
+		<li class="textSize"><a href="{{ url_for('school', school = school.schoolName) }}" class="textSize">{{ school.schoolName }}</a></li>
+    {% endif %}
+	</ul>
+  {% endfor %}
+	{% endif %}
+
+	{% if intermediateTrigger %}
+	<h3> متوسط </h3>
+  {% for school in schoolList %}
+	<ul class="list-unstyled list-inline">
+    {% if school.intermediate %}
+		<li><a href="{{ url_for('school', school = school.schoolName) }}" class="textSize">{{ school.schoolName }}</a></li>
+    {% endif %}
+	</ul>
+  {% endfor %}
+	{% endif %}
+
+	{% if elementaryTrigger %}
+	<h3> ابتدائي </h3>
+  {% for school in schoolList %}
+	<ul class="list-unstyled list-inline">
+    {% if school.elementary %}
+		<li><a href="{{ url_for('school', school = school.schoolName) }}" class="textSize">{{ school.schoolName }}</a></li>
+    {% endif %}
+	</ul>
+  {% endfor %}
+	{% endif %}
+
+	{% if tamhedyTrigger %}
+	<h3> تمهيدي </h3>
+  {% for school in schoolList %}
+	<ul class="list-unstyled list-inline">
+    {% if school.tamhedy %}
+		<li><a href="{{ url_for('school', school = school.schoolName) }}" class="textSize">{{ school.schoolName }}</a></li>
+    {% endif %}
+	</ul>
+  {% endfor %}
+	{% endif %}
+
+	{% if rawdhaTrigger	%}
+	<h3> روضة </h3>
+  {% for school in schoolList %}
+	<ul class="list-unstyled list-inline">
+    {% if school.rawdha %}
+		<li><a href="{{ url_for('school', school = school.schoolName) }}" class="textSize">{{ school.schoolName }}</a></li>
+    {% endif %}
+	</ul>
+  {% endfor %}
+	{% endif %}
+
+</div>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$(".textSize").css({"font-size":"20px"});
+		});
+</script>
+
+{% endblock %}

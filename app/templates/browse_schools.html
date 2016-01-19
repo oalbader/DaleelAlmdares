@@ -1,0 +1,48 @@
+{% extends "layout.html" %} {% block body %}
+
+<div class="text-right">
+	<h2>الرياض</h2>
+
+	<h3> ثانوي </h3>
+	<ul class="list-unstyled list-inline">
+		{% for school in highSchools %}
+		<li class="textSize"><a href="{{ url_for('school', school = school.school) }}" class="textSize">{{ school.school }}</a></li>
+		{% endfor %}
+	</ul>
+
+	<h3> متوسط </h3>
+	<ul class="list-unstyled list-inline">
+		{% for school in intermediateSchools %}
+		<li><a href="{{ url_for('school', school = school.school) }}" class="textSize">{{ school.school }}</a></li>
+		{% endfor %}
+	</ul>
+
+	<h3> ابتدائي </h3>
+	<ul class="list-unstyled list-inline">
+		{% for school in elementarySchools %}
+		<li><a href="{{ url_for('school', school = school.school) }}" class="textSize">{{ school.school }}</a></li>
+		{% endfor %}
+	</ul>
+
+	<h3> تمهيدي </h3>
+	<ul class="list-unstyled list-inline">
+		{% for school in tamhedySchools %}
+		<li><a href="{{ url_for('school', school = school.school) }}" class="textSize">{{ school.school }}</a></li>
+		{% endfor %}
+	</ul>
+
+	<h3> روضة </h3>
+	<ul class="list-unstyled list-inline">
+		{% for school in rawdhaSchools %}
+		<li><a href="{{ url_for('school', school = school.school) }}" class="textSize">{{ school.school }}</a></li>
+		{% endfor %}
+	</ul>
+
+</div>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			$(".textSize").css({"font-size":"20px"});
+		});
+</script>
+{% endblock %}

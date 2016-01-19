@@ -1,0 +1,147 @@
+{% extends "layout.html" %} {% block body %} {% for school in schoolInfo %}
+
+<style>
+  #mapCanvas {
+    width: 500px;
+    height: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 400px;
+  }
+</style>
+
+<div class="text-right col-md-10" style="padding-top:20px">
+  <h2 class="col-md-8">{{ school.schoolName }}</h2>
+  <br><br>
+
+  <h3 style="padding-top:20px">:المراحل الدراسية</h3>
+  <ul class="list-unstyled list-inline">
+    {% if school.rawdha %}
+    <li style="font-size:20px;padding-right:30px">روضة</li>
+    {% endif %}
+    {% if school.tamhedy %}
+    <li style="font-size:20px;padding-right:30px">تمهيدي</li>
+    {% endif %}
+    {% if school.elementary %}
+    <li style="font-size:20px;padding-right:30px">ابتدائي</li>
+    {% endif %}
+    {% if school.intermediate %}
+    <li style="font-size:20px;padding-right:30px">متوسطة</li>
+    {% endif %}
+    {% if school.highSchool %}
+    <li style="font-size:20px;padding-right:30px">ثانوي</li>
+    {% endif %}
+    <li style="padding-right:65px"></li>
+  </ul>
+
+  <br><br>
+
+  <h3>العنوان</h3>
+  <p class="col-md-11" style="font-size:20px">{% if school.city == 'Riyadh' %} الرياض {% endif %} - {{ school.location }}</p>
+
+  <br><br>
+
+  <div id="mapCanvas"></div>
+
+  <br><br>
+
+  <h3>الهاتف</h3>
+  <p class="col-md-11" style="font-size:20px">{{ school.phone }}</p>
+
+  <br><br>
+
+  <h3>عن المدرسة</h3>
+  <p class="col-md-11" style="font-size:20px">{{ school.discreption }}</p>
+
+  <br><br>
+
+  <h3>الجنس</h3>
+  <p class="col-md-11" style="font-size:20px">{% if school.gender == 'male' %} بنين {% elif school.gender == 'female' %} بنات {% elif school.gender == 'mix'%} مختلط mix {% endif %}</p>
+
+  <br><br>
+
+  <script>
+
+    function initialize() {
+      var myLatLng = {lat: {{ school.lat }}, lng: {{ school.lng }} };
+
+      var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+      zoom: 12,
+      center: myLatLng
+      });
+
+      var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: 'Hello World!'
+      });
+    }
+
+  </script>
+  {% endfor %}
+
+  <h3>صور</h3>
+<!--
+  <div style="margin-bottom:100px">
+    {% for images in imgInfo %}
+    <img src="{{ url_for('static', filename=images.imgName)}}" width="400px" height="300px" style="margin-top:10px;margin-left:10px">
+    {% endfor %}
+  </div>
+-->
+<div class="flex-container">
+  <div class="flexslider">
+    <ul class="slides">
+      {% for images in imgInfo %}
+      <li>
+        <img src="{{ url_for('static', filename=images.imgName)}}" />
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+</div>
+
+
+
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1_KECv_g3w_D1e3BIQjPin25XO0xcZ2I&callback=initialize">
+</script>
+<script src="{{ url_for('static', filename='jquery.flexslider-min.js') }}"></script>
+<script>
+  $(document).ready(function() {
+    $('.flexslider').flexslider({
+      animation: 'fade',
+      controlsContainer: '.flexslider'
+    });
+  });
+</script>
+<script>
+  window.setInterval(styleImages, 500);
+  function styleImages() {
+    var numberOfli = document.getElementsByClassName('slides')[0].children.length;
+    var stopJ = 7 + numberOfli;
+    for(var i=0; i<numberOfli; i++){
+      for(var j=7; j<stopJ; j++){
+        if(document.getElementsByTagName('li')[j].className == "flex-active-slide"){
+          document.getElementsByTagName('li')[j].style.display = "block";
+        }else{
+          document.getElementsByTagName('li')[j].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+<script>
+  document.onload = setTimeout(clearFun, 500);
+  function clearFun(){
+    document.getElementsByClassName("flex-next")[0].innerHTML= "";
+    document.getElementsByClassName("flex-prev")[0].innerHTML= "";
+    document.getElementsByClassName('flex-prev')[0].setAttribute('onclick', 'styleImages()');
+    document.getElementsByClassName('flex-next')[0].setAttribute('onclick', 'styleImages()');
+    styleImages();
+  }
+
+</script>
+
+{% endblock %}
